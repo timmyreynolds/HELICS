@@ -1190,7 +1190,7 @@ void Federate::logMessage(int level, const std::string& message) const
     }
 }
 
-Interface::Interface(Federate* federate, interface_handle id, std::string_view actName):
+Interface::Interface(Federate* federate, InterfaceHandle id, std::string_view actName):
     handle(id), mName(actName)
 {
     if (federate != nullptr) {
