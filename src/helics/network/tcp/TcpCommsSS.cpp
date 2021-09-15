@@ -188,6 +188,8 @@ namespace tcp {
                 auto new_connect = generateConnection(ioctx, conn);
 
                 if (new_connect) {
+                    new_connect->set_ssl_verify_mode();
+                    new_connect->ssl_handshake_client();
                     new_connect->setDataCall(dataCall);
                     new_connect->setErrorCall(errorCall);
                     new_connect->send(cstring);
@@ -227,6 +229,9 @@ namespace tcp {
                         setRxStatus(connection_status::error);
                         return;
                     }
+
+                    brokerConnection->set_ssl_verify_mode();
+                    brokerConnection->ssl_handshake_client();
 
                     brokerConnection->setDataCall(dataCall);
                     brokerConnection->setErrorCall(errorCall);
@@ -312,6 +317,8 @@ namespace tcp {
                                         generateConnection(ioctx,
                                                            std::string(cmd.payload.to_string()));
                                     if (new_connect) {
+                                        new_connect->set_ssl_verify_mode();
+                                        new_connect->ssl_handshake_client();
                                         new_connect->setDataCall(dataCall);
                                         new_connect->setErrorCall(errorCall);
                                         new_connect->send(cstring);

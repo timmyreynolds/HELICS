@@ -223,7 +223,7 @@ TcpConnection::TcpConnection(asio::io_context& io_context,
                              const std::string& connection,
                              const std::string& port,
                              size_t bufferSize):
-    socket_(io_context),
+    ssl_context_(asio::ssl::context::tls), socket_(io_context, ssl_context_),
     context_(io_context), data(bufferSize), connecting(true), idcode(idcounter++)
 {
     tcp::resolver resolver(io_context);
@@ -245,6 +245,23 @@ void TcpConnection::connect_handler(const std::error_code& error)
         connected.activate();
     }
 }
+
+void TcpConnection::set_ssl_verify_mode()
+{
+    socket_.set_verify_mode(asio::ssl::verify_peer);
+    socket_.set_verify_callback([](bool preverified, asio::ssl::verify_context& ctx) { return preverified; });
+}
+
+void TcpConnection::ssl_handshake_server()
+{
+    socket_.handshake(asio::ssl::stream_base::server);
+}
+
+void TcpConnection::ssl_handshake_client()
+{
+    socket_.handshake(asio::ssl::stream_base::client);
+}
+
 size_t TcpConnection::send(const void* buffer, size_t dataLength)
 {
     if (!isConnected()) {
@@ -689,6 +706,8 @@ void TcpServer::handle_accept(TcpAcceptor::pointer acc, TcpConnection::pointer n
         return;
     }
 
+    new_connection->set_ssl_verify_mode();
+    new_connection->ssl_handshake_server();
     new_connection->setDataCall(dataCall);
     new_connection->setErrorCall(errorCall);
     new_connection->startReceive();

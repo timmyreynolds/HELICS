@@ -11,6 +11,7 @@ SPDX-License-Identifier: BSD-3-Clause
 
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
+#include <asio/ssl.hpp>
 #include <functional>
 #include <memory>
 #include <string>
@@ -22,6 +23,17 @@ various helper classes and functions for handling TCP connections
 */
 namespace helics {
 namespace tcp {
+    class SslContext: public asio::ssl::context {
+      public:
+        SslContext(asio::ssl::context::method m)
+		: asio::ssl::context(m)
+        {
+          asio::ssl::context::set_password_callback([](auto max_len, auto purpose) { return "test"; });
+          asio::ssl::context::load_verify_file("ca.pem");
+          asio::ssl::context::use_private_key_file("server.pem", asio::ssl::context::pem);
+          asio::ssl::context::use_certificate_chain_file("server_with_pass.pem");
+	}
+    };
     /** tcp socket generation for a receiving server*/
     class TcpConnection: public std::enable_shared_from_this<TcpConnection> {
       public:
@@ -58,6 +70,9 @@ namespace tcp {
         void waitOnClose();
         /**check if the connection is receiving data*/
         bool isReceiving() const { return receivingHalt.isActive(); }
+        void set_ssl_verify_mode();
+        void ssl_handshake_client();
+        void ssl_handshake_server();
         /** set the callback for the data object*/
         void setDataCall(
             std::function<size_t(TcpConnection::pointer, const char*, size_t)> dataFunc);
@@ -137,7 +152,7 @@ namespace tcp {
 
       private:
         TcpConnection(asio::io_context& io_context, size_t bufferSize):
-            socket_(io_context), context_(io_context), data(bufferSize), idcode(idcounter++)
+            ssl_context_(asio::ssl::context::tls), socket_(io_context, ssl_context_), context_(io_context), data(bufferSize), idcode(idcounter++)
         {
         }
         TcpConnection(asio::io_context& io_context,
@@ -158,7 +173,9 @@ namespace tcp {
         static std::atomic<int> idcounter;
 
         std::atomic<size_t> residBufferSize{0};
-        asio::ip::tcp::socket socket_;
+
+        SslContext ssl_context_;
+        asio::ssl::stream<asio::ip::tcp::socket> socket_;
         asio::io_context& context_;
         std::vector<char> data;
         std::atomic<bool> triggerhalt{false};

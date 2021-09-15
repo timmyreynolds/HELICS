@@ -134,6 +134,17 @@ target_link_libraries(
     helics_network PUBLIC HELICS::core PRIVATE fmt::fmt compile_flags_target helics::zmq
 )
 
+# Find OpenSSL
+find_package(OpenSSL REQUIRED)
+target_link_libraries(
+    helics_network PUBLIC OpenSSL::SSL OpenSSL::Crypto
+)
+if(TARGET OpenSSL::applink)
+    target_link_libraries(
+        helics_network PRIVATE OpenSSL::applink
+    )
+endif()
+
 if(TARGET Boost::boost AND NOT HELICS_DISABLE_BOOST)
     target_compile_definitions(helics_network PRIVATE BOOST_DATE_TIME_NO_LIB)
     target_link_libraries(helics_network PRIVATE Boost::boost)

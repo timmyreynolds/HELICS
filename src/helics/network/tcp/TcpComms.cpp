@@ -251,6 +251,8 @@ namespace tcp {
             if (requestDisconnect.load(std::memory_order::memory_order_acquire)) {
                 return terminate(connection_status::terminated);
             }
+            brokerConnection->set_ssl_verify_mode();
+            brokerConnection->ssl_handshake_client();
             // monitor the total waiting time before connections
             std::chrono::milliseconds cumulativeSleep{0};
             const std::chrono::milliseconds popTimeout{200};
@@ -392,7 +394,8 @@ namespace tcp {
                                 std::tie(interface, port) = extractInterfaceandPortString(newroute);
                                 auto new_connect =
                                     TcpConnection::create(ioctx->getBaseContext(), interface, port);
-
+                                new_connect->set_ssl_verify_mode();
+                                new_connect->ssl_handshake_client();
                                 routes.emplace(route_id{cmd.getExtraData()},
                                                std::move(new_connect));
                             }
