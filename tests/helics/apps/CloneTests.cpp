@@ -184,6 +184,7 @@ TEST(clone_tests, simple_clone_test_combo)
     auto& pub2 = mfed.registerPublication("pub2", "double", "m");
 
     auto fut = std::async(std::launch::async, [&c1]() { c1.runTo(6); });
+    mfed.enterInitializingMode();
     mfed.enterExecutingMode();
     auto retTime = mfed.requestTime(1);
     EXPECT_EQ(retTime, 1.0);

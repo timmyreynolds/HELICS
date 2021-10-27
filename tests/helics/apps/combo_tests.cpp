@@ -280,6 +280,10 @@ static void generateFiles_binary(const ghc::filesystem::path& f1, const ghc::fil
                              helics::DataType::HELICS_DOUBLE);
 
     auto fut = std::async(std::launch::async, [&rec1]() { rec1.runTo(5.0); });
+    mfed2.enterInitializingModeAsync();
+    mfed.enterInitializingMode();
+    mfed2.enterInitializingModeComplete();
+
     mfed2.enterExecutingModeAsync();
     mfed.enterExecutingMode();
     mfed2.enterExecutingModeComplete();

@@ -484,6 +484,10 @@ TEST(recorder_tests, recorder_test_endpoint_clone)
     rec1.addSourceEndpointClone("d1");
 
     auto fut = std::async(std::launch::async, [&rec1]() { rec1.runTo(5.0); });
+    mfed2.enterInitializingModeAsync();
+    mfed.enterInitializingMode();
+    mfed2.enterInitializingModeComplete();
+
     mfed2.enterExecutingModeAsync();
     mfed.enterExecutingMode();
     mfed2.enterExecutingModeComplete();
@@ -539,6 +543,10 @@ TEST_P(recorder_clone_file_tests, simple_clone_test_file)
     rec1.loadFile(std::string(TEST_DIR) + GetParam());
 
     auto fut = std::async(std::launch::async, [&rec1]() { rec1.runTo(5.0); });
+    mfed2.enterInitializingModeAsync();
+    mfed.enterInitializingMode();
+    mfed2.enterInitializingModeComplete();
+
     mfed2.enterExecutingModeAsync();
     mfed.enterExecutingMode();
     mfed2.enterExecutingModeComplete();
@@ -600,6 +608,10 @@ TEST(recorder_tests, recorder_test_saveFile1)
     rec1.addSourceEndpointClone("d1");
 
     auto fut = std::async(std::launch::async, [&rec1]() { rec1.runTo(5.0); });
+    mfed2.enterInitializingModeAsync();
+    mfed.enterInitializingMode();
+    mfed2.enterInitializingModeComplete();
+
     mfed2.enterExecutingModeAsync();
     mfed.enterExecutingMode();
     mfed2.enterExecutingModeComplete();
@@ -709,6 +721,10 @@ TEST(recorder_tests, recorder_test_saveFile3)
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         rec1.runTo(5.0);
     });
+    mfed2.enterInitializingModeAsync();
+    mfed.enterInitializingMode();
+    mfed2.enterInitializingModeComplete();
+
     mfed2.enterExecutingModeAsync();
     mfed.enterExecutingMode();
     mfed2.enterExecutingModeComplete();
