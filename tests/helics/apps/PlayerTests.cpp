@@ -18,7 +18,7 @@ SPDX-License-Identifier: BSD-3-Clause
 
 TEST(player_tests, simple_player_test)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
 
     fi.coreName = "pcore1";
     fi.coreInitString = "-f2 --autobroker";
@@ -56,7 +56,7 @@ TEST(player_tests, simple_player_test)
 
 TEST(player_tests, simple_player_test_diff_inputs)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore2";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -98,7 +98,7 @@ TEST(player_tests, simple_player_test_diff_inputs)
 
 TEST(player_tests, simple_player_test_iterative)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore3";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -139,7 +139,7 @@ TEST(player_tests, simple_player_test_iterative)
 
 TEST(player_tests, simple_player_test2)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore4";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -200,7 +200,7 @@ class player_file_tests: public ::testing::TestWithParam<const char*> {
 TEST_P(player_file_tests, test_files)
 {
     static char indx = 'a';
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = std::string("pcore5") + GetParam();
     fi.coreName.push_back(indx++);
     fi.coreInitString = "-f 2 --autobroker";
@@ -245,7 +245,7 @@ TEST_P(player_file_tests, test_files)
 
 TEST(player_tests, bigfile)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcorebig";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -301,7 +301,7 @@ TEST(player_tests, bigfile)
 TEST(player_tests, simple_player_mlinecomment)
 {
     static char indx = 'a';
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore6-mline";
     fi.coreName.push_back(indx++);
     fi.coreInitString = " -f 2 --autobroker";
@@ -470,7 +470,7 @@ INSTANTIATE_TEST_SUITE_P(player_tests, player_file_tests, ::testing::ValuesIn(si
 
 TEST(player_tests, simple_player_testjson)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore7";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -511,7 +511,7 @@ TEST(player_tests, simple_player_testjson)
 
 TEST(player_tests, player_test_message)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore8";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -539,7 +539,7 @@ TEST(player_tests, player_test_message)
 
 TEST(player_tests, player_test_message2)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore9";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -589,7 +589,7 @@ TEST(player_tests, player_test_message2)
 
 TEST(player_tests, player_test_message3)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "pcore10";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Player play1("player1", fi);
@@ -648,7 +648,7 @@ class player_message_file_tests: public ::testing::TestWithParam<const char*> {
 TEST_P(player_message_file_tests, message_test_files)
 {
     static char indx = 'a';
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = std::string("pcore11") + GetParam();
     fi.coreName.push_back(indx++);
     fi.coreInitString = "-f 2 --autobroker";

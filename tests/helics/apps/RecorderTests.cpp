@@ -28,7 +28,7 @@ SPDX-License-Identifier: BSD-3-Clause
 
 TEST(recorder_tests, simple_recorder_test)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "rcore1";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -61,7 +61,7 @@ TEST(recorder_tests, simple_recorder_test)
 
 TEST(recorder_tests, simple_recorder_test2)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "rcore1-t2";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -106,7 +106,7 @@ TEST(recorder_tests, simple_recorder_test2)
 
 TEST(recorder_tests, recorder_test_message)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "rcore-tm";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -139,7 +139,7 @@ class recorder_file_tests: public ::testing::TestWithParam<const char*> {
 
 TEST_P(recorder_file_tests, test_files)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = std::string("coref") + GetParam();
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -215,7 +215,7 @@ class recorder_message_file_tests: public ::testing::TestWithParam<const char*> 
 
 TEST_P(recorder_message_file_tests, test_message_files)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = std::string("rcoretmf") + GetParam();
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -373,7 +373,7 @@ INSTANTIATE_TEST_SUITE_P(recorder_tests,
 TEST(recorder_tests, recorder_test_destendpoint_clone)
 {
     helics::FederateInfo fi;
-    fi.coreType = helics::CoreType::TEST;
+    fi.coreType = helics::CoreType::INPROC;
     fi.coreName = "rcore-dep";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -422,7 +422,7 @@ TEST(recorder_tests, recorder_test_destendpoint_clone)
 TEST(recorder_tests, recorder_test_srcendpoint_clone)
 {
     helics::FederateInfo fi;
-    fi.coreType = helics::CoreType::TEST;
+    fi.coreType = helics::CoreType::INPROC;
     fi.coreName = "rcore2";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -467,7 +467,7 @@ TEST(recorder_tests, recorder_test_srcendpoint_clone)
 
 TEST(recorder_tests, recorder_test_endpoint_clone)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
 
     fi.coreName = "rcore3";
     fi.coreInitString = "-f 3 --autobroker";
@@ -528,7 +528,7 @@ class recorder_clone_file_tests: public ::testing::TestWithParam<const char*> {
 
 TEST_P(recorder_clone_file_tests, simple_clone_test_file)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = std::string("rcore4") + GetParam();
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -592,7 +592,7 @@ INSTANTIATE_TEST_SUITE_P(recorder_tests,
 
 TEST(recorder_tests, recorder_test_saveFile1)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "rcore5";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -650,7 +650,7 @@ TEST(recorder_tests, recorder_test_saveFile1)
 
 TEST(recorder_tests, recorder_test_saveFile2)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "rcore6";
     fi.coreInitString = "-f 2 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -696,7 +696,7 @@ TEST(recorder_tests, recorder_test_saveFile2)
 
 TEST(recorder_tests, recorder_test_saveFile3)
 {
-    helics::FederateInfo fi(helics::CoreType::TEST);
+    helics::FederateInfo fi(helics::CoreType::INPROC);
     fi.coreName = "rcore7";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
