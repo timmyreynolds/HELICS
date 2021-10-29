@@ -27,7 +27,7 @@ SPDX-License-Identifier: BSD-3-Clause
 
 static void generateFiles(const ghc::filesystem::path& f1, const ghc::filesystem::path& f2)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
     fi.coreName = "ccore2";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -104,7 +104,7 @@ static void generateFiles(const ghc::filesystem::path& f1, const ghc::filesystem
 
 static void useFile(const std::string& corename, const std::string& file)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
     fi.coreName = corename;
     fi.coreInitString = "-f 1 --autobroker";
     fi.setProperty(HELICS_PROPERTY_TIME_PERIOD, 1.0);
@@ -127,7 +127,7 @@ static const std::string Message2(55, 17);
 
 static void generateFiles2(const ghc::filesystem::path& f1, const ghc::filesystem::path& f2)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
     fi.coreName = "ccore2b";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -204,7 +204,7 @@ static void generateFiles2(const ghc::filesystem::path& f1, const ghc::filesyste
 
 static void useFile2(const std::string& corename, const std::string& file)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
     fi.coreName = corename;
     fi.coreInitString = "-f 1 --autobroker";
     fi.setProperty(HELICS_PROPERTY_TIME_PERIOD, 1.0);
@@ -258,7 +258,7 @@ TEST(combo_tests, save_load_file2)
 
 static void generateFiles_binary(const ghc::filesystem::path& f1, const ghc::filesystem::path& f2)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
     fi.coreName = "ccore3";
     fi.coreInitString = "-f 3 --autobroker";
     helics::apps::Recorder rec1("rec1", fi);
@@ -335,8 +335,8 @@ static void generateFiles_binary(const ghc::filesystem::path& f1, const ghc::fil
 
 static void useFileBinary(const std::string& corename, const std::string& file)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
-    fi.coreType = helics::CoreType::TCPSS;
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
+    fi.coreType = helics::CoreType::TCP_SS;
     fi.coreName = corename;
     fi.coreInitString = "-f 1 --autobroker";
     fi.setProperty(HELICS_PROPERTY_TIME_PERIOD, 1.0);
@@ -385,7 +385,7 @@ TEST(combo_tests, save_load_file_binary)
 
 TEST(combo_tests, check_combination_file_load)
 {
-    helics::FederateInfo fi(helics::CoreType::TCPSS);
+    helics::FederateInfo fi(helics::CoreType::TCP_SS);
     fi.coreName = "ccore_combo";
     fi.coreInitString = "-f 3 --autobroker";
 
