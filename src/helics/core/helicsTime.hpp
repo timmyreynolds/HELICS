@@ -50,3 +50,4 @@ struct iteration_time {
 };
 
 }  // namespace helics
+#endif  //_HELICS_TIME_HEADER_
