@@ -19,7 +19,7 @@ SPDX-License-Identifier: BSD-3-Clause
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/spdlog.h"
-#if !defined(_WIN32) && !defined(__MINGW32__)
+#if !defined(_WIN32)
 #    include "spdlog/sinks/syslog_sink.h"
 #endif
 
@@ -293,7 +293,7 @@ void BrokerBase::generateLoggers()
             }
         }
         if (logFile == "syslog") {
-#if !defined(_WIN32) && !defined(__MINGW32__)
+#if !defined(_WIN32)
             fileLogger = spdlog::syslog_logger_mt("syslog", identifier);
 #endif
         } else if (!logFile.empty()) {
