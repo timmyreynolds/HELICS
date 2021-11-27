@@ -22,4 +22,4 @@ cmake -G "${BUILD_GEN}" -A "${BUILD_ARCH/x86/Win32}" -DCMAKE_BUILD_TYPE=Release 
 cmake --build . --config Release
 "${cpack_dir}/cpack" -G "${CPACK_GEN}" -C Release -B "$(pwd)/../artifact"
 cd ../artifact || exit
-rm -rf _CPack_Packages
+#rm -rf _CPack_Packages
