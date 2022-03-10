@@ -281,6 +281,8 @@ void Recorder::writeJsonFile(const std::string& filename)
 
     std::ofstream o(filename);
     o << doc << std::endl;
+    o.flush();
+    o.close();
 }
 
 void Recorder::writeTextFile(const std::string& filename)
@@ -329,6 +331,8 @@ void Recorder::writeTextFile(const std::string& filename)
             outFile << "\t\"" << m->data.to_string() << "\"\n";
         }
     }
+    outFile.flush();
+    outFile.close();
 }
 
 void Recorder::initialize()

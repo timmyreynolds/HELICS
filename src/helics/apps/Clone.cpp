@@ -167,6 +167,8 @@ namespace apps {
 
         std::ofstream o(filename);
         o << doc << std::endl;
+	o.flush();
+	o.close();
         fileSaved = true;
     }
 
