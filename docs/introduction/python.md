@@ -43,19 +43,27 @@ Copy the contents from
 [pireceiver.py](https://github.com/GMLC-TDC/HELICS-Examples/blob/main/python/pi-exchange/pireceiver.py)
 and paste it into the file.
 
+Next, create a new source file and call it 'broker.py'.
+Copy the contents from
+[broker.py](https://github.com/GMLC-TDC/HELICS-Examples/blob/main/python/pi-exchange/broker.py)
+
 Save the files.
 
 **Running a federation**
 
 Linux and Mac:
 
-Next, open two terminals. In the first terminal, run the following command.
+Next, open three terminals. In the first terminal, run the following command.
 
+```bash
+$ python broker.py
+```
+In a second terminal, run the following command.
 ```bash
 $ python pisender.py
 ```
 
-In a second terminal, run the following command.
+In a third terminal, run the following command.
 
 ```bash
 $ python pireceiver.py
